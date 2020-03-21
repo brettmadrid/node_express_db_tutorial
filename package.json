@@ -1,0 +1,28 @@
+{
+  "name": "node_express_db_tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brettmadrid/node_express_db_tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brettmadrid/node_express_db_tutorial/issues"
+  },
+  "homepage": "https://github.com/brettmadrid/node_express_db_tutorial#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.20.12",
+    "sqlite3": "^4.1.1"
+  }
+}
