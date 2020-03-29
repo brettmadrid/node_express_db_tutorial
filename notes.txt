@@ -1,0 +1,80 @@
+a RESTful Express app should provide for all the CRUD operations
+
+            REST            |       non REST
+                            |
+
+GET /api/users | /getUsers
+|
+POST /api/users | /addUser
+|
+UPDATE /api/users/:id | /updateUser
+|
+DELETE /api/users/:id | /deleteUser
+
+REST allows for more efficient Server Side Routing code
+
+We will once again use knex
+our queries in javascript are referred to as models:
+
+const knex = require('knex');
+const config = require('../knexfile.js');
+const db = knex(config.development);
+
+module.exports = {
+add,
+find,
+findById,
+remove,
+update,
+addMessage,
+findLessonMessages,
+findMessageById
+};
+
+async function add(lesson) {
+// .insert returns an array
+const [id] = await db('lessons').insert(lesson);
+
+return findById(id);
+}
+
+function find() {
+return db('lessons')
+}
+
+function findById(id) {
+return db('lessons')
+.where({ id })
+.first();
+}
+
+function remove(id) {
+return db('lessons')
+.where({ id })
+.del();
+}
+
+function update(id, changes) {
+return db('lessons')
+.where({ id })
+.update(changes, '\*');
+}
+
+async function addMessage(message) {
+const [id] = await db('messages').insert(message);
+
+return findMessageById(id);
+}
+
+function findlessonMessages(lessonId) {
+return db('messages as m')
+.join('lessons as h', 'm.lesson_id', 'h.id')
+.select('m.id', 'm.text', 'm.sender', 'h.id as lessonId', 'h.name as lesson')
+.where({ lesson_id: lessonId });
+}
+
+function findMessageById(id) {
+return db('messages')
+.where({ id })
+.first();
+}
