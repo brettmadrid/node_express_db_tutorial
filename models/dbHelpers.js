@@ -7,12 +7,13 @@ module.exports = {
   add,
   find,
   findById,
-  remove
+  remove,
+  update
 };
 
 async function add(lesson) {
   const [id] = await db("lessons").insert(lesson);
-  //   return id;
+  return findById(id);
 }
 
 function find() {
@@ -29,4 +30,13 @@ function remove(id) {
   return db("lessons")
     .where({ id })
     .del();
+}
+
+function update(id, changes) {
+  return db("lessons")
+    .where({ id })
+    .update(changes, [id])
+    .then(() => {
+      return findById(id);
+    });
 }

@@ -63,6 +63,22 @@ server.delete("/api/lessons/:id", (req, res) => {
     });
 });
 
+server.patch("/api/lessons/:id", (req, res) => {
+  const { id } = req.params;
+
+  Lessons.update(id, req.body)
+    .then(lesson => {
+      if (lesson) {
+        res.status(200).json(lesson);
+      } else {
+        res.status(404).json({ message: "Record not found" });
+      }
+    })
+    .catch(error => {
+      res.status(500).json({ message: "Unable to update record" });
+    });
+});
+
 server.listen(PORT, () => {
   console.log(`\n*** Server running on port ${PORT} ***\n`);
 });
