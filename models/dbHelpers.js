@@ -35,7 +35,7 @@ function remove(id) {
 function update(id, changes) {
   return db("lessons")
     .where({ id })
-    .update(changes, [id])
+    .update(changes)
     .then(() => {
       return findById(id);
     });

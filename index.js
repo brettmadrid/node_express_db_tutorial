@@ -65,8 +65,9 @@ server.delete("/api/lessons/:id", (req, res) => {
 
 server.patch("/api/lessons/:id", (req, res) => {
   const { id } = req.params;
+  const changes = req.body;
 
-  Lessons.update(id, req.body)
+  Lessons.update(id, changes)
     .then(lesson => {
       if (lesson) {
         res.status(200).json(lesson);
@@ -74,8 +75,8 @@ server.patch("/api/lessons/:id", (req, res) => {
         res.status(404).json({ message: "Record not found" });
       }
     })
-    .catch(error => {
-      res.status(500).json({ message: "Unable to update record" });
+    .catch(err => {
+      res.status(500).json({ message: "Error updating record" });
     });
 });
 
