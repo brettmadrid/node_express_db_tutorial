@@ -1,15 +1,10 @@
-a RESTful Express app should provide for all the CRUD operations
+db-config.js
+const knex = require('knex');
+const config = require('../knexfile.js');
+const environment = process.env.DB_ENV || 'development';
+module.exports = knex(config[environment]);
 
-            REST            |       non REST
-                            |
-GET        /api/users       |       /getUsers
-                            |
-POST       /api/users       |       /addUser
-                            |
-UPDATE     /api/users/:id   |       /updateUser
-                            |
-DELETE     /api/users/:id   |       /deleteUser
 
-REST allows for more efficient Server Side Routing code
+to run migrations on pg file:
 
-We will learn more about this when we get to Server Side Routing
+    knex migrate:latest --env=production
