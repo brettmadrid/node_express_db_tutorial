@@ -1,7 +1,8 @@
 // where we write our knex queries
-const knex = require("knex");
-const config = require("../knexfile");
-const db = knex(config.development);
+// const knex = require("knex");
+// const config = require("../knexfile");
+// const db = knex(config.development);
+const db = require("../dbConfig");
 
 module.exports = {
   add,
@@ -11,7 +12,7 @@ module.exports = {
   update,
   addMessage,
   findLessonMessages,
-  removeMessage
+  removeMessage,
 };
 
 async function add(lesson) {
@@ -24,15 +25,11 @@ function find() {
 }
 
 function findById(id) {
-  return db("lessons")
-    .where({ id })
-    .first();
+  return db("lessons").where({ id }).first();
 }
 
 function remove(id) {
-  return db("lessons")
-    .where({ id })
-    .del();
+  return db("lessons").where({ id }).del();
 }
 
 function update(id, changes) {
@@ -45,15 +42,11 @@ function update(id, changes) {
 }
 
 function findMessageById(id) {
-  return db("messages")
-    .where({ id })
-    .first();
+  return db("messages").where({ id }).first();
 }
 
 async function addMessage(message, lesson_id) {
-  const [id] = await db("messages")
-    .where({ lesson_id })
-    .insert(message);
+  const [id] = await db("messages").where({ lesson_id }).insert(message);
   return findMessageById(id);
 }
 
@@ -71,7 +64,5 @@ function findLessonMessages(lesson_id) {
 }
 
 function removeMessage(id) {
-  return db("messages")
-    .where({ id })
-    .del();
+  return db("messages").where({ id }).del();
 }
