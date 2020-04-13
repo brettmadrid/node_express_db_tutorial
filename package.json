@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "nodemon index.js",
-    "start": "node index.js"
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +24,6 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.20.12",
-    "pg": "^8.0.2",
     "sqlite3": "^4.1.1"
   }
 }
