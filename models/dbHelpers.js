@@ -16,8 +16,9 @@ module.exports = {
 };
 
 async function add(lesson) {
-  const [id] = await db("lessons").insert(lesson);
-  return findById(id);
+  return await db("lessons").insert(lesson, ["id", "name"]);
+  // const [id] = await db("lessons").insert(lesson);
+  // return findById(id);
 }
 
 function find() {
