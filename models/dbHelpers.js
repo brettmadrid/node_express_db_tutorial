@@ -47,9 +47,7 @@ function findMessageById(id) {
 }
 
 async function addMessage(message, lesson_id) {
-  return await db("messages")
-    .where({ lesson_id })
-    .insert(message, ["lesson_id", "name", "id", "sender", "text"]);
+  return await db("messages").where({ lesson_id }).insert(message, ["id"]);
   // const [id] = await db("messages").where({ lesson_id }).insert(message);
   // return findMessageById(id);
 }
