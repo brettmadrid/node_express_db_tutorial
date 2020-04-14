@@ -1,7 +1,3 @@
-// where we write our knex queries
-// const knex = require("knex");
-// const config = require("../knexfile");
-// const db = knex(config.development);
 const db = require("../dbConfig");
 
 module.exports = {
@@ -16,9 +12,8 @@ module.exports = {
 };
 
 async function add(lesson) {
-  return await db("lessons").insert(lesson, ["id", "name"]);
-  // const [id] = await db("lessons").insert(lesson);
-  // return findById(id);
+  const [id] = await db("lessons").insert(lesson);
+  return findById(id);
 }
 
 function find() {
@@ -47,9 +42,8 @@ function findMessageById(id) {
 }
 
 async function addMessage(message, lesson_id) {
-  return await db("messages").where({ lesson_id }).insert(message, ["id"]);
-  // const [id] = await db("messages").where({ lesson_id }).insert(message);
-  // return findMessageById(id);
+  const [id] = await db("messages").where({ lesson_id }).insert(message);
+  return findMessageById(id);
 }
 
 function findLessonMessages(lesson_id) {
