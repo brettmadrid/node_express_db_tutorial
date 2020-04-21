@@ -9,7 +9,22 @@ module.exports = {
   addMessage,
   findLessonMessages,
   removeMessage,
+  addUser,
+  findAllUsers,
+  findUserByUsername,
 };
+
+async function addUser(user) {
+  return await db("users").insert(user, ["id", "username"]);
+}
+
+function findAllUsers() {
+  return db("users");
+}
+
+function findUserByUsername(username) {
+  return db("users").where({ username }).first();
+}
 
 async function add(lesson) {
   return await db("lessons").insert(lesson, ["id", "name"]);
