@@ -1,0 +1,20 @@
+explain what a session is and how it works.  Explain the roll of a cookie (i.e. gym pass)
+explain middleware and how it can interrupt or allow things to pass
+add express-session dependency
+create auth folder and move the auth and login routes in that folder.  Update all paths affected
+require and use session.  
+explain the parts of the sessionConfig object
+create restricted-middleware file in the auth folder - explain roll of this file. For now just put next()
+require restriced in server.js and place as middleware in the user routes
+put a console.log(req.session) in the restricted middleware file and make a get request and show object
+in the login endpoint add req.session.user object just before returning status(200) message
+in the restricted-middleware add:
+
+    if (req.session && req.session.user) {
+        next();
+    } else {
+        res.status(401).json({ message: "Sorry dude.  Not logged in!" });
+    }
+
+now try to to a get and show how you need to be logged in
+log in and show how you can now perform a get
