@@ -1,6 +1,7 @@
 const express = require("express");
 const Lessons = require("../models/dbHelpers");
 const bcrypt = require("bcryptjs");
+const generateToken = require("./generateToken");
 
 const router = express.Router();
 
@@ -39,12 +40,9 @@ router.post("/login", (req, res) => {
   Lessons.findUserByUsername(username)
     .then((user) => {
       if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.user = {
-          id: user.id,
-          username: user.username,
-        };
+        const token = generateToken(user);
 
-        res.status(200).json({ message: `Welcome ${user.username}!` });
+        res.status(200).json({ message: `Welcome ${user.username}!`, token });
       } else {
         res.status(401).json({ message: "Invalid credentials" });
       }
@@ -52,25 +50,6 @@ router.post("/login", (req, res) => {
     .catch((error) => {
       res.status(500).json(error);
     });
-});
-
-router.get("/logout", (req, res) => {
-  if (req.session) {
-    req.session.destroy((error) => {
-      if (error) {
-        res
-          .status(500)
-          .json({
-            message:
-              "You can check out anytime you like, but you can never leave.",
-          });
-      } else {
-        res.status(200).json({ message: "Successfully logged out" });
-      }
-    });
-  } else {
-    res.status(200).json({ message: "Not logged in" });
-  }
 });
 
 module.exports = router;
