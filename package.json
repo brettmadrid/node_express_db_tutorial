@@ -29,7 +29,7 @@
     "express-session": "^1.17.1",
     "helmet": "^3.22.0",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^0.20.12",
+    "knex": "^2.4.0",
     "morgan": "^1.10.0",
     "pg": "^8.0.2",
     "sqlite3": "^4.1.1"
